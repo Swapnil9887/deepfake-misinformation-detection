@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🧐 Analysis Result</h1>
+
+        <!-- Deepfake Image Detection Result -->
+        {% if image_path %}
+        <div class="result-box">
+            <h2>🖼️ Image Deepfake Analysis</h2>
+            <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image">
+            <p class="result-text">Prediction: <strong>{{ prediction }}</strong></p>
+        </div>
+        {% endif %}
+
+        <!-- Fake News Detection Result -->
+        {% if news_text %}
+        <div class="result-box">
+            <h2>📰 News Analysis</h2>
+            <p class="news-content">"<i>{{ news_text }}</i>"</p>
+            <p class="result-text">Prediction: <strong>{{ news_prediction }}</strong></p>
+        </div>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="btn">🔄 Analyze Another</a>
+    </div>
+</body>
+</html>

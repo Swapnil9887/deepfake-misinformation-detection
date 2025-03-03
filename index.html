@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthShield: AI-Powered Deepfake & Fake News Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 IlluVision</h1>
+        <h2>AI-Powered Deepfake & Fake News Detector</h2>
+
+        <!-- Image Upload Section -->
+        <div class="upload-section">
+            <h2>🖼️ Upload an Image for Deepfake Analysis</h2>
+            <form action="{{ url_for('predict_image') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required onchange="previewImage(event)">
+                <br>
+                <img id="imagePreview" style="display:none; max-width:100%; border-radius: 10px; margin-top:10px;">
+                <button type="submit">Analyze Image</button>
+            </form>
+        </div>
+
+        <!-- News Text Analysis Section -->
+        <div class="text-section">
+            <h2>📰 Enter News Text for Fake News Detection</h2>
+            <form action="{{ url_for('predict_news') }}" method="post">
+                <textarea name="news_text" placeholder="Enter news text here..." required></textarea>
+                <button type="submit">Analyze News</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
